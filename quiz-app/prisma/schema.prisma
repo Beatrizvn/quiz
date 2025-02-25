@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  user_id   String       @id @default(uuid())
+  username  String       @unique
+  email     String       @unique
+  password  String
+  quizzes   Quiz[]
+  attempts  NumAttempt[]
+  answers   UserAnswer[]
+}
+
+model Quiz {
+  quiz_id            String  @id @default(uuid())
+  created_by_user_id String @map("created_by_user_id")
+  date_of_creation  DateTime @default(now())
+  createdBy         User  @relation(fields: [created_by_user_id], references: [user_id])
+  questions         Question[]
+  attempts          NumAttempt[]
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+}
+
+model Question {
+  question_id  String @id @default(uuid())
+  quiz_id      String
+  type         QuestionType
+  question     String
+  option1      String
+  option2      String
+  option3      String
+  option4      String
+  right_answer String
+  quiz         Quiz  @relation(fields: [quiz_id], references: [quiz_id])
+  answers      UserAnswer[]
+}
+
+model NumAttempt {
+  num_attempt_id String @id @default(uuid())
+  quiz_id        String
+  user_id        String
+  attempt_date   DateTime @default(now())
+  quiz           Quiz  @relation(fields: [quiz_id], references: [quiz_id])
+  user           User  @relation(fields: [user_id], references: [user_id])
+  answers        UserAnswer[]
+}
+
+model UserAnswer {
+  user_answers_id String @id @default(uuid())
+  question_id     String
+  user_id         String
+  num_attempt_id  String
+  user_answer     String
+  question        Question  @relation(fields: [question_id], references: [question_id])
+  user            User  @relation(fields: [user_id], references: [user_id])
+  attempt         NumAttempt @relation(fields: [num_attempt_id], references: [num_attempt_id])
+}
+
