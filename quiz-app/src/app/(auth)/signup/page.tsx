@@ -12,7 +12,7 @@ export default function SignUp() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch("/api/signup", {
+    const response = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import prisma from './prisma';
 
 export async function getCurrentUser() {
-  const token = (await cookies()).get('token')?.value;
+  const token = cookies().get('accessToken')?.value;
 
   if (!token) {
     return null;
@@ -13,6 +13,11 @@ export async function getCurrentUser() {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
     });
     return user;
   } catch (error) {
