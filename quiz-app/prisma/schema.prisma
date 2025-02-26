@@ -13,24 +13,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  user_id   String       @id @default(uuid())
-  username  String       @unique
-  email     String       @unique
+  id        String      @id @default(uuid())
+  name  String      @unique
+  email     String      @unique
   password  String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
   quizzes   Quiz[]
   attempts  NumAttempt[]
   answers   UserAnswer[]
 }
 
 model Quiz {
-  quiz_id            String  @id @default(uuid())
-  created_by_user_id String @map("created_by_user_id")
-  date_of_creation  DateTime @default(now())
-  createdBy         User  @relation(fields: [created_by_user_id], references: [user_id])
-  questions         Question[]
-  attempts          NumAttempt[]
+  id               String     @id @default(uuid())
+  createdByUserId  String     @map("created_by_user_id")
+  dateOfCreation   DateTime   @default(now()) @map("date_of_creation")
+  createdBy        User       @relation(fields: [createdByUserId], references: [id])
+  questions        Question[]
+  attempts         NumAttempt[]
+
+  @@map("quizzes") // Opcional: para mapear o nome da tabela no banco de dados
 }
 
 enum QuestionType {
@@ -39,37 +42,42 @@ enum QuestionType {
 }
 
 model Question {
-  question_id  String @id @default(uuid())
-  quiz_id      String
+  id           String       @id @default(uuid())
+  quizId       String       @map("quiz_id")
   type         QuestionType
   question     String
   option1      String
   option2      String
   option3      String
   option4      String
-  right_answer String
-  quiz         Quiz  @relation(fields: [quiz_id], references: [quiz_id])
+  rightAnswer  String       @map("right_answer")
+  quiz         Quiz         @relation(fields: [quizId], references: [id])
   answers      UserAnswer[]
+
+  @@map("questions") // Opcional: para mapear o nome da tabela no banco de dados
 }
 
 model NumAttempt {
-  num_attempt_id String @id @default(uuid())
-  quiz_id        String
-  user_id        String
-  attempt_date   DateTime @default(now())
-  quiz           Quiz  @relation(fields: [quiz_id], references: [quiz_id])
-  user           User  @relation(fields: [user_id], references: [user_id])
-  answers        UserAnswer[]
+  id           String       @id @default(uuid())
+  quizId       String       @map("quiz_id")
+  userId       String       @map("user_id")
+  attemptDate  DateTime     @default(now()) @map("attempt_date")
+  quiz         Quiz         @relation(fields: [quizId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
+  answers      UserAnswer[]
+
+  @@map("num_attempts") // Opcional: para mapear o nome da tabela no banco de dados
 }
 
 model UserAnswer {
-  user_answers_id String @id @default(uuid())
-  question_id     String
-  user_id         String
-  num_attempt_id  String
-  user_answer     String
-  question        Question  @relation(fields: [question_id], references: [question_id])
-  user            User  @relation(fields: [user_id], references: [user_id])
-  attempt         NumAttempt @relation(fields: [num_attempt_id], references: [num_attempt_id])
-}
+  id             String       @id @default(uuid())
+  questionId     String       @map("question_id")
+  userId         String       @map("user_id")
+  numAttemptId   String       @map("num_attempt_id")
+  userAnswer     String       @map("user_answer")
+  question       Question     @relation(fields: [questionId], references: [id])
+  user           User         @relation(fields: [userId], references: [id])
+  attempt        NumAttempt   @relation(fields: [numAttemptId], references: [id])
 
+  @@map("user_answers") // Opcional: para mapear o nome da tabela no banco de dados
+}
