@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ButtonProps {
-  label: string;
+  label: React.ReactNode | string;
   type?: 'submit' | 'button' | 'reset';
   color?: 'primary' | 'secondary' | 'red' | 'green';
   size?: 'small' | 'medium' | 'large';
@@ -17,14 +17,14 @@ const Button: React.FC<ButtonProps> = ({ label, type = 'submit', color = 'primar
   };
 
   const sizeClasses = {
-    small: 'px-3 py-2 text-xs',
+    small: 'px-2 py-2 text-xs',
     medium: 'px-5 py-2.5 text-sm',
     large: 'px-5 py-3 text-base',
   };
 
   return (
     <button
-      className={`rounded-md font-semibold transition-all duration-200 ${sizeClasses[size]} ${buttonClasses[color]}`}
+      className={`rounded-md font-semibold transition-all duration-200 ${sizeClasses[size]} ${buttonClasses[color]} flex items-center`}
       onClick={onClick}
       type={type}
     >

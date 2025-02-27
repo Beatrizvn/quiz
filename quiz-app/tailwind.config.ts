@@ -19,11 +19,11 @@ const config = {
     },
     extend: {
       colors: {
-        "navy-900": "var(--navy-900)",
-        "navy-800": "var(--navy-800)",
-        "navy-700": "var(--navy-700)",
-        "gold-200": "var(--gold-200)",
-        "gold-100": "var(--gold-100)",
+        "palette-lavender-1": "var(--palette-lavender-1)",
+        "palette-gray-1": "var(--palette-gray-1)",
+        "palette-white-1": "var(--palette-white-1)",
+        "palette-gray-2": "var(--palette-gray-2)",
+        "palette-black-1": "var(--palette-black-1)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         background: "hsl(var(--background))",
