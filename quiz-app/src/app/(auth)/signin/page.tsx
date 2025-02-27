@@ -4,6 +4,7 @@ import Button from '@/components/ui/Button';
 import { useAuth } from '../../../../context/AuthContext';
 import { useRouter } from 'next/navigation';
 import Input from '@/components/ui/InputAuth';
+import Logo from '@/components/ui/Logo';
 
 export default function SignIn() {
   const { login } = useAuth();
@@ -37,18 +38,19 @@ export default function SignIn() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-background">
-      <div className="flex items-center justify-center w-96 h-96 bg-white rounded-lg shadow-lg">
+      <div className="flex flex-col items-center justify-center w-96 h-96 bg-white rounded-lg shadow-lg">
+        <Logo className="mb-10" /> 
         <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4 w-72">
-          <Input name="email" type="email" placeholder="Email" required label='Email' id='email'/>
+          <Input name="email" type="email" placeholder="Email" required label='Email' id='email' />
           <Input name="password" type="password" placeholder="Password" required label='Password' id='password' />
           <Button label="Sign-in" color="primary" />
-
-          <div className="mt-6 text-center text-sm">
-            <p className="text-gray-600 inline">If you dont have an account</p>
+  
+          <div className="mt-6 pb-5 text-center text-sm">
+            <p className="text-gray-600 inline">If you don't have an account</p>
             <a href="/signup" className="text-blue-500 hover:underline"> Sign up</a>
           </div>
         </form>
       </div>
     </div>
-  );
+  );  
 }

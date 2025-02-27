@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Input from "@/components/ui/InputAuth";
 import Button from "@/components/ui/Button";
+import Logo from "@/components/ui/Logo";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -33,7 +34,8 @@ export default function SignUp() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-background">
-      <div className="flex items-center justify-center w-96 h-96 bg-white rounded-lg shadow-lg">
+      <div className="flex flex-col items-center justify-center w-96 h-100 bg-white rounded-lg shadow-lg">
+        <Logo className="mb-7" /> 
         <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4 w-72">
           <Input
             type="text"
@@ -61,7 +63,7 @@ export default function SignUp() {
           />
           <Button label="Sign-up" color="primary" />
 
-          <div className="mt-6 text-center text-sm">
+          <div className="mt-6 pb-5 text-center text-sm">
             <p className="text-gray-600 inline">If you already have an account</p>
             <a href="/signin" className="text-blue-500 hover:underline inline ml-1">Sign in</a>
           </div>
