@@ -25,7 +25,6 @@ const Home = async () => {
         <p className="text-gray-600">Signed in as:</p>
         <p className="font-medium">Hello {user.name}</p>
       </div>
-
       <LogoutButton />
     </>
   );

@@ -11,7 +11,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: 'Email and password are required' }, { status: 400 });
   }
 
-  // Verifica se JWT_SECRET está definido
   if (!process.env.JWT_SECRET) {
     throw new Error('JWT_SECRET is not defined in environment variables');
   }
@@ -35,7 +34,6 @@ export async function POST(request: Request) {
       expiresIn: '15m', 
     });
 
-    // Armazena o refresh token em um cookie HTTP-only
     const cookieStore = cookies();
     cookieStore.set('accessToken', accessToken, {
       httpOnly: true,
@@ -45,7 +43,6 @@ export async function POST(request: Request) {
       sameSite: 'strict',
     });
 
-    // Retorna o access token no corpo da resposta
     return NextResponse.json({ accessToken }, { status: 200 });
 
   } catch (error) {

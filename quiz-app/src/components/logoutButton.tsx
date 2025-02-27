@@ -2,6 +2,7 @@
 
 import { useAuth } from '../../context/AuthContext';
 import { useRouter } from 'next/navigation';
+import Button from './ui/Button';
 
 export default function LogoutButton() {
   const { logout } = useAuth();
@@ -10,12 +11,10 @@ export default function LogoutButton() {
   const handleLogout = async () => {
     logout();
     await fetch('/api/auth/signout', { method: 'POST' });
-    router.push('/signin'); 
+    router.push('/signin');
   };
 
   return (
-    <button onClick={handleLogout}>
-      Logout
-    </button>
+      <Button label="Logout" color="red" onClick={handleLogout} />
   );
 }
