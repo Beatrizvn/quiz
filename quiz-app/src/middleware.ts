@@ -6,10 +6,14 @@ export function middleware(request: NextRequest) {
   const currentUser = request.cookies.get('accessToken')?.value
 
   if (currentUser && request.nextUrl.pathname === '/signin') {
-    return NextResponse.redirect(new URL('/teste', request.url))
+    return NextResponse.redirect(new URL('/home', request.url))
   }
 
-  if (!currentUser && request.nextUrl.pathname.startsWith('/teste')) {
+  if (currentUser && request.nextUrl.pathname === '/') {
+    return NextResponse.redirect(new URL('/home', request.url))
+  }
+
+  if (!currentUser && request.nextUrl.pathname.startsWith('/home')) {
     return NextResponse.redirect(new URL('/signin', request.url))
   }
 

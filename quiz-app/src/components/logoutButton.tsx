@@ -15,6 +15,6 @@ export default function LogoutButton() {
   };
 
   return (
-      <Button label="Logout" color="red" onClick={handleLogout} />
+      <Button label="Logout" color="red" size='small' onClick={handleLogout} />
   );
 }

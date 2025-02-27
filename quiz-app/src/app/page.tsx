@@ -1,10 +1,9 @@
-import LogoutButton from "@/components/logoutButton";
 import { getCurrentUser } from "../../lib/auth";
 
-const Home = async () => {
+const MyApp = async () => {
 
   const user = await getCurrentUser();
-
+  
   if (!user) {
     return (
       <div className="w-full max-w-sm mx-auto space-y-6">
@@ -19,15 +18,5 @@ const Home = async () => {
     );
   }
 
-  return (
-    <>
-      <div className="bg-gray-100 rounded-lg p-4 text-center mb-6">
-        <p className="text-gray-600">Signed in as:</p>
-        <p className="font-medium">Hello {user.name}</p>
-      </div>
-      <LogoutButton />
-    </>
-  );
-
 }
-export default Home;
+export default MyApp;
