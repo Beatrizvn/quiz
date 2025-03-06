@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-// import jwt from 'jsonwebtoken';
+
+const privatePages = ['/home', '/my-quizzes']
 
 export function middleware(request: NextRequest) {
   const currentUser = request.cookies.get('accessToken')?.value
@@ -13,7 +14,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/home', request.url))
   }
 
-  if (!currentUser && request.nextUrl.pathname.startsWith('/home')) {
+  if (!currentUser && privatePages.some(page => request.nextUrl.pathname.startsWith(page))) {
     return NextResponse.redirect(new URL('/signin', request.url))
   }
 

@@ -30,10 +30,11 @@ model Quiz {
   createdByUserId  String     @map("created_by_user_id")
   dateOfCreation   DateTime   @default(now()) @map("date_of_creation")
   createdBy        User       @relation(fields: [createdByUserId], references: [id])
+  theme            String     
   questions        Question[]
   attempts         NumAttempt[]
 
-  @@map("quizzes") // Opcional: para mapear o nome da tabela no banco de dados
+  @@map("quizzes") 
 }
 
 enum QuestionType {
@@ -54,7 +55,7 @@ model Question {
   quiz         Quiz         @relation(fields: [quizId], references: [id])
   answers      UserAnswer[]
 
-  @@map("questions") // Opcional: para mapear o nome da tabela no banco de dados
+  @@map("questions") 
 }
 
 model NumAttempt {
@@ -66,7 +67,7 @@ model NumAttempt {
   user         User         @relation(fields: [userId], references: [id])
   answers      UserAnswer[]
 
-  @@map("num_attempts") // Opcional: para mapear o nome da tabela no banco de dados
+  @@map("num_attempts") 
 }
 
 model UserAnswer {
@@ -79,5 +80,5 @@ model UserAnswer {
   user           User         @relation(fields: [userId], references: [id])
   attempt        NumAttempt   @relation(fields: [numAttemptId], references: [id])
 
-  @@map("user_answers") // Opcional: para mapear o nome da tabela no banco de dados
+  @@map("user_answers") 
 }

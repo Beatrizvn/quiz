@@ -1,6 +1,4 @@
-
 import { getCurrentUser } from "../../../lib/auth";
-
 
 const Home = async () => {
 

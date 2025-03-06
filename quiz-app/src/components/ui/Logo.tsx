@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface LogoProps {
-  className?: string; // Permite passar a propriedade className opcional
+  className?: string;
 }
 
 export default function Logo({ className }: LogoProps) {

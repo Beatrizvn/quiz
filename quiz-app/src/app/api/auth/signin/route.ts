@@ -5,10 +5,10 @@ import { cookies } from 'next/headers';
 import prisma from '../../../../../lib/prisma';
 
 export async function POST(request: Request) {
-  const { email, password } = await request.json();
+  const { identifier, password } = await request.json(); // 'identifier' pode ser email ou username
 
-  if (!email || !password) {
-    return NextResponse.json({ message: 'Email and password are required' }, { status: 400 });
+  if (!identifier || !password) {
+    return NextResponse.json({ message: 'Email/Username and password are required' }, { status: 400 });
   }
 
   if (!process.env.JWT_SECRET) {
@@ -16,8 +16,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const user = await prisma.user.findUnique({
-      where: { email },
+    const user = await prisma.user.findFirst({
+      where: {
+        OR: [{ email: identifier }, { name: identifier }],
+      },
     });
 
     if (!user) {
@@ -25,13 +27,12 @@ export async function POST(request: Request) {
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
-
     if (!isPasswordValid) {
       return NextResponse.json({ message: 'Invalid password' }, { status: 401 });
     }
 
     const accessToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-      expiresIn: '15m', 
+      expiresIn: '15m',
     });
 
     const cookieStore = cookies();

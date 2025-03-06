@@ -26,28 +26,6 @@ export default function Sidebar() {
           <li className="border-r border-transparent hover:border-palette-lavender-1">
             <Link href="/" className="flex items-center gap-2 p-2 hover:border-palette-lavender-1 hover:text-palette-lavender-1 transition-colors duration-200">
               <Image
-                src="/assets/alt-user.svg" 
-                alt="Profile Icon"
-                width={20}
-                height={20}
-              />
-              <span className="font-semibold">My Profile</span>
-            </Link>
-          </li>
-          <li className="border-r border-transparent hover:border-palette-lavender-1">
-            <Link href="/" className="flex items-center gap-2 p-2 hover:border-palette-lavender-1 hover:text-palette-lavender-1 transition-colors duration-200">
-              <Image
-                src="/assets/alt-book.svg" 
-                alt="Quizzes Icon"
-                width={20}
-                height={20}
-              />
-              <span className="font-semibold">My Quizzes</span>
-            </Link>
-          </li>
-          <li className="border-r border-transparent hover:border-palette-lavender-1">
-            <Link href="/" className="flex items-center gap-2 p-2 hover:border-palette-lavender-1 hover:text-palette-lavender-1 transition-colors duration-200">
-              <Image
                 src="/assets/alt-bulb.svg" // Caminho para o SVG
                 alt="Found Quizzes Icon"
                 width={20}
@@ -56,9 +34,30 @@ export default function Sidebar() {
               <span className="font-semibold">Found Quizzes</span>
             </Link>
           </li>
+          <li className="border-r border-transparent hover:border-palette-lavender-1">
+            <Link href="/" className="flex items-center gap-2 p-2 hover:border-palette-lavender-1 hover:text-palette-lavender-1 transition-colors duration-200">
+              <Image
+                src="/assets/alt-book.svg"
+                alt="Quizzes Icon"
+                width={20}
+                height={20}
+              />
+              <span className="font-semibold">My Quizzes</span>
+            </Link>
+          </li>
+          <li className="border-r border-transparent hover:border-palette-lavender-1">
+            <Link href="/my-quizzes" className="flex items-center gap-2 p-2 hover:border-palette-lavender-1 hover:text-palette-lavender-1 transition-colors duration-200">
+              <Image
+                src="/assets/alt-user.svg"
+                alt="Profile Icon"
+                width={20}
+                height={20}
+              />
+              <span className="font-semibold">My Profile</span>
+            </Link>
+          </li>
         </ul>
       </nav>
-
       {/* Logout button in bottom*/}
       <div className="p-4 px-6 mt-auto place-content-center">
         <LogoutButton />

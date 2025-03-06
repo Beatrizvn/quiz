@@ -35,11 +35,11 @@ export default function SignUp() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-background">
       <div className="flex flex-col items-center justify-center w-96 h-100 bg-white rounded-lg shadow-lg">
-        <Logo className="mb-7" /> 
+        <Logo className="mb-7" />
         <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4 w-72">
           <Input
             type="text"
-            placeholder="Name"
+            placeholder="Username"
             value={name}
             onChange={(e) => setName(e.target.value)}
             label='Username'
