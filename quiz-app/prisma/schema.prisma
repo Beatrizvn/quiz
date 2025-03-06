@@ -27,6 +27,7 @@ model User {
 
 model Quiz {
   id               String     @id @default(uuid())
+  title            String
   createdByUserId  String     @map("created_by_user_id")
   dateOfCreation   DateTime   @default(now()) @map("date_of_creation")
   createdBy        User       @relation(fields: [createdByUserId], references: [id])

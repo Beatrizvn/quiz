@@ -43,9 +43,11 @@ export function AuthWrapper({ children }: { children: React.ReactNode; }) {
   }, [accessToken, login, pathname, router]);
 
   return (
-    <>
-      {children}
-      {Dashboard(accessToken)}
-    </>
-  );
+    <div className="flex h-screen">
+      <aside className="w-64 bg-gray-800">
+        {Dashboard(accessToken)}
+      </aside>
+      <main className="flex-1 p-4">{children}</main>
+    </div>
+  );  
 }

@@ -35,7 +35,7 @@ export default function Sidebar() {
             </Link>
           </li>
           <li className="border-r border-transparent hover:border-palette-lavender-1">
-            <Link href="/" className="flex items-center gap-2 p-2 hover:border-palette-lavender-1 hover:text-palette-lavender-1 transition-colors duration-200">
+            <Link href="/my-quizzes" className="flex items-center gap-2 p-2 hover:border-palette-lavender-1 hover:text-palette-lavender-1 transition-colors duration-200">
               <Image
                 src="/assets/alt-book.svg"
                 alt="Quizzes Icon"
